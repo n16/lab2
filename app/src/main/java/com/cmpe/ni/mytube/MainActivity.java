@@ -2,6 +2,8 @@
 
 package com.cmpe.ni.mytube;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -21,11 +23,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 
-public class MainActivity extends AppCompatActivity implements
+public class MainActivity extends Activity implements
         View.OnClickListener,
-        ActivityCompat.OnRequestPermissionsResultCallback,
+        //ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
+
+    ////my
+    private ConnectionResult connResult;
 
     private static final String TAG = "MainActivity";
 
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements
 
     //Should we automatically resolve ConnectionResults when possible?
     private boolean mShouldResolve = false;
+    private int ERROR_SIGN_IN = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         // Restore from saved instance state
-        // [START restore_saved_instance_state]
         if (savedInstanceState != null) {
             mIsResolving = savedInstanceState.getBoolean(KEY_IS_RESOLVING);
             mShouldResolve = savedInstanceState.getBoolean(KEY_SHOULD_RESOLVE);
@@ -73,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements
                 .build();
     }
 
-    // [START on_start_on_stop]
     @Override
     protected void onStart() {
         super.onStart();
@@ -110,20 +114,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult:" + requestCode);
-        if (requestCode == RC_PERM_GET_ACCOUNTS) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //showSignedInUI();
-            } else {
-                Log.d(TAG, "GET_ACCOUNTS Permission Denied.");
-            }
-        }
-    }
-
-    @Override
     public void onConnected(Bundle bundle) {
         Log.d(TAG, "onConnected:" + bundle);
         mShouldResolve = false;
@@ -154,7 +144,11 @@ public class MainActivity extends AppCompatActivity implements
                 // error dialog.
                 showErrorDialog(connectionResult);
             }
+
+            /////my
+            connResult = connectionResult;
         }
+
     }
 
     private void showErrorDialog(ConnectionResult connectionResult) {
@@ -180,10 +174,12 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    // [START on_click]
     @Override
     public void onClick(View v) {
         onSignInClicked();
+
+        /////my
+        takeToSearchScreen();
     }
 
     private void onSignInClicked() {
@@ -191,6 +187,20 @@ public class MainActivity extends AppCompatActivity implements
         mGoogleApiClient.connect();
 
     }
+
+    private void takeToSearchScreen(){
+        /////my
+        if (mGoogleApiClient.isConnected()) {
+            Intent i = new Intent(MainActivity.this, SearchActivity.class);
+            MainActivity.this.startActivity(i);
+        }
+
+        //TODO remove this!!!!!
+        else {
+            mGoogleApiClient.connect();
+        }
+    }
+
 
     private void onDisconnectClicked() {
         if (mGoogleApiClient.isConnected()) {
@@ -200,4 +210,5 @@ public class MainActivity extends AppCompatActivity implements
         }
 
     }
+
 }
