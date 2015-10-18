@@ -7,11 +7,17 @@
     android:weightSum="4"
     tools:context=".FavoriteActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/textTest"
-        android:textSize="30sp"
-        android:text="This is a favorite screen" />
+
+<!--    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getUserYouTubeFeed"
+        android:text="Get YouTube Feed" />-->
+
+    <com.cmpe.ni.mytube.VideosListView
+        android:layout_marginTop="40dp"
+        android:id="@+id/videosListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

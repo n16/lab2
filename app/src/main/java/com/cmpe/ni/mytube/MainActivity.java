@@ -1,5 +1,3 @@
-
-
 package com.cmpe.ni.mytube;
 
 import android.annotation.SuppressLint;
@@ -13,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,11 +22,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 
-public class MainActivity extends Activity implements
+public class MainActivity extends Activity /*implements
         View.OnClickListener,
         //ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener */{
 
     ////my
     private ConnectionResult connResult;
@@ -59,7 +58,10 @@ public class MainActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Restore from saved instance state
+        Intent i = new Intent(MainActivity.this, FavoriteActivity.class);
+        MainActivity.this.startActivity(i);
+    }
+/*        // Restore from saved instance state
         if (savedInstanceState != null) {
             mIsResolving = savedInstanceState.getBoolean(KEY_IS_RESOLVING);
             mShouldResolve = savedInstanceState.getBoolean(KEY_SHOULD_RESOLVE);
@@ -209,6 +211,6 @@ public class MainActivity extends Activity implements
             mGoogleApiClient.disconnect();
         }
 
-    }
+    }*/
 
 }
