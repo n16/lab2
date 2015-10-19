@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyTube</string>
+    <string name="search_hint">Search for a video here</string>
+    <string name="favorite_playlist">SJSU-CMPE-277</string>
+    <string name="menu">menu</string>
+    <string name="action_remove">Remove</string>
+</resources>
