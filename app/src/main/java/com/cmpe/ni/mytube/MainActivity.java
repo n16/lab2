@@ -179,7 +179,7 @@ public class MainActivity extends Activity /*implements
     private void takeToSearchScreen(){
         /////my
         if (mGoogleApiClient.isConnected()) {
-            Intent i = new Intent(MainActivity.this, SearchActivity.class);
+            Intent i = new Intent(MainActivity.this, SearchFragment.class);
             MainActivity.this.startActivity(i);
         }
 
