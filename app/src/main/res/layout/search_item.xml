@@ -7,33 +7,31 @@
     android:weightSum="1">
 
     <com.cmpe.ni.mytube.ViewThumbnail
-        android:id="@+id/userVideoThumbImageView"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
+        android:id="@+id/userVideoThumbImageViewSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="YouTube video thumbnail"
-        android:src="@drawable/square"
+        android:src="@drawable/ic_cast_dark"
         android:layout_marginRight="4dp"
         />
 
 
     <TextView
-        android:id="@+id/userVideoTitleTextView"
+        android:id="@+id/userVideoTitleTextViewSearch"
         android:layout_width="199dp"
-        android:layout_height="match_parent"
+        android:layout_height="101dp"
         android:text="Video Title Not Found"
         android:layout_weight="0.85"
         android:layout_marginTop="4dp"
         />
 
-    <CheckBox
-        android:id="@+id/checkBox"
+    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onCheckboxClicked"
-        android:layout_alignBottom="@+id/downPaymentValueEditText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
+        android:id="@+id/ratingStar"
+        android:numStars="1"
+        android:layout_below="@+id/searchView"
+        android:layout_alignParentEnd="true" />
 
 
 </LinearLayout>

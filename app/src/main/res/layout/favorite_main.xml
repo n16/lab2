@@ -8,12 +8,6 @@
     tools:context=".FavoriteActivity">
 
 
-<!--    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="getUserYouTubeFeed"
-        android:text="Get YouTube Feed" />-->
-
     <com.cmpe.ni.mytube.VideosListView
         android:layout_marginTop="40dp"
         android:id="@+id/videosListView"
