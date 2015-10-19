@@ -20,8 +20,8 @@ public class VideosListView extends ListView {
         super(context);
     }
 
-    public void setVideos(List<Video> videos){
-        VideosAdapter adapter = new VideosAdapter(getContext(), videos);
+    public void setVideos(List<Video> videos, VideoClickListener listener){
+        VideosAdapter adapter = new VideosAdapter(getContext(), videos, listener);
         setAdapter(adapter);
     }
 

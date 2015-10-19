@@ -27,5 +27,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-fitness:8.1.0'
     compile 'com.google.android.gms:play-services-wearable:8.1.0'
     compile 'com.google.android.gms:play-services-base:8.1.0'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 
 }
