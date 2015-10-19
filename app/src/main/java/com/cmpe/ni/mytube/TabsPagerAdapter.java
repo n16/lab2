@@ -16,8 +16,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (index) {
             case 0:
                 // Top Rated fragment activity
-                // TODO: change this to actual search fragment
-                return new FavoriteFragment();
+                return new SearchFragment();
             case 1:
                 // Games fragment activity
                 return new FavoriteFragment();
@@ -33,3 +32,4 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     }
 
 }
+

@@ -43,7 +43,8 @@ public class MainActivity extends Activity /*implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent i = new Intent(MainActivity.this, FavoriteFragment.class);
+        Intent i = new Intent(MainActivity.this, VideoListActivity.class);
+
         MainActivity.this.startActivity(i);
     }
 /*        // Restore from saved instance state

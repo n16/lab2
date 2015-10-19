@@ -1,16 +1,22 @@
 package com.cmpe.ni.mytube;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +24,8 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 public class VideosAdapter extends BaseAdapter {
     private SparseBooleanArray mSelectedItemsIds;
-    List<Video> videos;
+    public List<Video> videos;
+    public List<Video> toBeRemovedList = new ArrayList<Video>();
     private LayoutInflater mInflater;
     private VideoClickListener listener;
 
@@ -64,14 +71,25 @@ public class VideosAdapter extends BaseAdapter {
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (videos.get(position).getValue() == 1)
+                if(videos.get(position).getValue() == 1) {
                     cb.setChecked(true);
+
+                    //my
+                    Video country = videos.get(position);
+                    System.out.println("Remove");
+                    System.out.println(country);
+                    //remove(country);
+                    //collect all videos to be removed
+                    toBeRemovedList.add(country);
+                    System.out.println("REMOVED");
+                }
                 else
                     cb.setChecked(false);
             }
         });
 
         final Video video = videos.get(position);
+
         thumb.setThumbnail(video.getThumbUrl());
         title.setText(video.getTitle());
 //        cb.setChecked(false);
@@ -88,11 +106,25 @@ public class VideosAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public List<Video> returnNewVideoList() {
+        return toBeRemovedList;
+
+    }
+
+    public void setNewVideoList(List<Video> list) {
+        videos = list;
+    }
+
+    public List<Video>currentVideos() {
+        return videos;
+    }
+
     public void remove(Video i) {
         videos.remove(i);
         notifyDataSetChanged();
         //TODO refresh
     }
+
 
     public SparseBooleanArray getSelectedIds() {
         return mSelectedItemsIds;
