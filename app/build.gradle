@@ -28,6 +28,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-cast:8.1.0'
     compile 'com.google.android.gms:play-services-wearable:8.1.0'
     compile 'com.google.android.gms:play-services-base:8.1.0'
+    compile 'com.google.android.gms:play-services-plus:8.1.0'
     compile 'com.google.apis:google-api-services-youtube:v3-rev150-1.20.0'
     compile 'com.android.support:design:23.0.1'
 }
