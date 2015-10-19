@@ -1,18 +1,22 @@
 package com.cmpe.ni.mytube;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -22,7 +26,7 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteActivity extends AppCompatActivity implements VideoClickListener  {
+public class FavoriteFragment extends Fragment implements VideoClickListener  {
     VideosAdapter listviewadapter;
     final private String DEVKEY = "AIzaSyBk1K3GI4ogDKBk5qHL3L5R5ZUCOWbHI4I";
 
@@ -38,71 +42,16 @@ public class FavoriteActivity extends AppCompatActivity implements VideoClickLis
 
         //get the videos
         getUserYouTubeFeed();
+    }
 
-       /*
-        // Capture ListView item click
-        listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.favorite_main, container, false);
 
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode,
-                                                  int position, long id, boolean checked) {
-                System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$");
-                // Capture total checked items
-                final int checkedCount = listView.getCheckedItemCount();
-                // Set the CAB title according to total checked items
-                mode.setTitle(checkedCount + " Selected");
-                // Calls toggleSelection method from ListViewAdapter Class
-                listviewadapter.toggleSelection(position);
-            }
 
-            @Override
-            public boolean onActionItemClicked (ActionMode mode, MenuItem item) {
-                System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$");
-                switch (item.getItemId()) {
-                    case R.id.action_settings:
-                        // Calls getSelectedIds method from ListViewAdapter Class
-                        SparseBooleanArray selected = listviewadapter
-                                .getSelectedIds();
-                        // Captures all selected ids with a loop
-                        for (int i = (selected.size() - 1); i >= 0; i--) {
-                            if (selected.valueAt(i)) {
-                                Video selecteditem = (Video)listviewadapter
-                                        .getItem(selected.keyAt(i));
-                                // Remove selected items following the ids
-                                //listviewadapter.remove(selecteditem);
-                                //removeFromYouTube();
-                                printList();
-                                listView.invalidate();
-                                getUserYouTubeFeed();
-                            }
-                        }
-                        // Close CAB
-                        mode.finish();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
 
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                mode.getMenuInflater().inflate(R.menu.menu_main, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-                return false;
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                // TODO Auto-generated method stub
-                listviewadapter.removeSelection();
-            }
-        }
-        );*/
-
+        return view;
     }
 
     public void printList() {
