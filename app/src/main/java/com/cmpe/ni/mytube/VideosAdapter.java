@@ -1,20 +1,27 @@
 package com.cmpe.ni.mytube;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 public class VideosAdapter extends BaseAdapter {
     private SparseBooleanArray mSelectedItemsIds;
-    List<Video> videos;
+    public List<Video> videos;
+    public List<Video> toBeRemovedList = new ArrayList<Video>();
     private LayoutInflater mInflater;
 
     public VideosAdapter(Context context, List<Video> videos) {
@@ -57,12 +64,25 @@ public class VideosAdapter extends BaseAdapter {
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(videos.get(position).getValue() == 1)
+                if(videos.get(position).getValue() == 1) {
                     cb.setChecked(true);
+
+                    //my
+                    Video country = videos.get(position);
+                    System.out.println("Remove");
+                    System.out.println(country);
+                    //remove(country);
+                    //collect all videos to be removed
+                    toBeRemovedList.add(country);
+                    System.out.println("REMOVED");
+                }
                 else
                     cb.setChecked(false);
             }
         });
+
+
+
 
         Video video = videos.get(position);
         thumb.setThumbnail(video.getThumbUrl());
@@ -72,11 +92,25 @@ public class VideosAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public List<Video> returnNewVideoList() {
+        return toBeRemovedList;
+
+    }
+
+    public void setNewVideoList(List<Video> list) {
+        videos = list;
+    }
+
+    public List<Video>currentVideos() {
+        return videos;
+    }
+
     public void remove(Video i) {
         videos.remove(i);
         notifyDataSetChanged();
         //TODO refresh
     }
+
 
     public SparseBooleanArray getSelectedIds() {
         return mSelectedItemsIds;

@@ -58,6 +58,7 @@ public class MainActivity extends Activity /*implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Intent i = new Intent(MainActivity.this, FavoriteActivity.class);
         MainActivity.this.startActivity(i);
     }

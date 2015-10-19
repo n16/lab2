@@ -1,6 +1,7 @@
 package com.cmpe.ni.mytube;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.TabActivity;
 import android.content.Intent;
@@ -25,14 +26,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteActivity extends FragmentActivity implements ActionBar.TabListener {
-    private ViewPager viewPager;
-    private TabsPagerAdapter mAdapter;
-    private ActionBar actionBar;
-    // Tab titles
-    private String[] tabs = {"Search", "Favorite"};
-
-
+public class FavoriteActivity1 extends Activity {
     VideosAdapter listviewadapter;
 
     private VideosListView listView;
@@ -44,46 +38,11 @@ public class FavoriteActivity extends FragmentActivity implements ActionBar.TabL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.favorite_main);
-        setContentView(R.layout.activity_main1);
-//my
-        // Initilization
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-
-        viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        // Adding Tabs
-        for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
-        }
-
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
-                actionBar.setSelectedNavigationItem(position);
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-        //actionBar.setHomeButtonEnabled(false);
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+        setContentView(R.layout.activity_main);
 
         //
 
-        /*listView = (VideosListView) findViewById(R.id.videosListView);
+        listView = (VideosListView) findViewById(R.id.videosListView);
         listviewadapter = new VideosAdapter(this, videosList);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,9 +61,9 @@ public class FavoriteActivity extends FragmentActivity implements ActionBar.TabL
         //get the videos
         getUserYouTubeFeed();
 
-       *//*
+
         // Capture ListView item click
-        listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+        listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode,
@@ -164,7 +123,7 @@ public class FavoriteActivity extends FragmentActivity implements ActionBar.TabL
                 listviewadapter.removeSelection();
             }
         }
-        );*//*
+        );
 
     }
 
@@ -224,10 +183,6 @@ public class FavoriteActivity extends FragmentActivity implements ActionBar.TabL
         };
     };
 
-    *//**
-         * This method retrieves the Library of videos from the task and passes them to our ListView
-         * @param msg
-         *//*
     private void populateListWithVideos(Message msg) {
         // Retreive the videos are task found from the data bundle sent back
         Library lib = (Library) msg.getData().get(GetVideos.LIBRARY);
@@ -242,23 +197,7 @@ public class FavoriteActivity extends FragmentActivity implements ActionBar.TabL
         // because who cares if we get a callback once the activity has stopped? not me!
         responseHandler = null;
         super.onStop();
-    }*/
-    }
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // on tab selected
-        // show respected fragment view
-        //System.out.println(tab.select());
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-    }
 
 }
