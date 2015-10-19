@@ -1,26 +1,11 @@
 package com.cmpe.ni.mytube;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.Plus;
 
 public class MainActivity extends Activity /*implements
         View.OnClickListener,
@@ -58,7 +43,7 @@ public class MainActivity extends Activity /*implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent i = new Intent(MainActivity.this, FavoriteActivity.class);
+        Intent i = new Intent(MainActivity.this, FavoriteFragment.class);
         MainActivity.this.startActivity(i);
     }
 /*        // Restore from saved instance state

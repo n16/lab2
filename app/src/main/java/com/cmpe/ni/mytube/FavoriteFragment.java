@@ -1,7 +1,7 @@
 package com.cmpe.ni.mytube;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -33,57 +33,43 @@ public class FavoriteFragment extends Fragment implements VideoClickListener  {
     private VideosListView listView;
     List<Video> videosList = new ArrayList<Video>();
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.favorite_main);
-        listView = (VideosListView) findViewById(R.id.videosListView);
-        listviewadapter = new VideosAdapter(this, videosList, this);
-
-        //get the videos
-        getUserYouTubeFeed();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favorite_main, container, false);
 
+        listView = (VideosListView) view.findViewById(R.id.videosListView);
+        listviewadapter = new VideosAdapter(getActivity(), videosList, this);
 
+        getUserYouTubeFeed();
 
         return view;
     }
 
-    public void printList() {
-        for (int i = 0; i < videosList.size(); i++) {
-            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$"+videosList.get(i).getTitle());
-        }
-    }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        final CheckBox cb = (CheckBox) findViewById(R.id.checkBox);
-
-        SparseBooleanArray selected = listviewadapter
-                .getSelectedIds();
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                //TODO read the list
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu items for use in the action bar
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        final CheckBox cb = (CheckBox) findViewById(R.id.checkBox);
+//
+//        SparseBooleanArray selected = listviewadapter
+//                .getSelectedIds();
+//        // Handle presses on the action bar items
+//        switch (item.getItemId()) {
+//            case R.id.action_settings:
+//                //TODO read the list
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     // This is the XML onClick listener to retreive a users video feed
     public void getUserYouTubeFeed(){
@@ -110,7 +96,7 @@ public class FavoriteFragment extends Fragment implements VideoClickListener  {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         // Make sure we null our handler when the activity has stopped
         // because who cares if we get a callback once the activity has stopped? not me!
         responseHandler = null;
@@ -121,15 +107,17 @@ public class FavoriteFragment extends Fragment implements VideoClickListener  {
     @Override
     public void StartPlayback(Video video) {
         try {
-            Intent intent = YouTubeStandalonePlayer.createVideoIntent(this, DEVKEY, video.getId());
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), DEVKEY, video.getId());
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Toast t = Toast.makeText(this,
+            Toast t = Toast.makeText(getActivity(),
                     "Could not start playback of video, please ensure you have the YouTube app installed",
                     Toast.LENGTH_LONG);
             t.show();
         } catch (Exception e) {
-            Toast t = Toast.makeText(this, "Couldn't start video: " + e.getMessage(), Toast.LENGTH_LONG);
+            Toast t = Toast.makeText(getActivity(),
+                    "Couldn't start video: " + e.getMessage(),
+                    Toast.LENGTH_LONG);
             t.show();
         }
     }

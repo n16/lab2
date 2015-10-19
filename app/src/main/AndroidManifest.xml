@@ -11,33 +11,28 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".FavoriteActivity"
-            android:label="@string/favorite_playlist"
-            >
+            android:name=".VideoListActivity"
+            android:label="@string/favorite_playlist" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SearchActivity"
-            android:label="+@string/search_playlist"
-            >
+            android:label="+@string/search_playlist" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
-import com.cmpe.ni.mytube.FavoriteActivity;
 
 public class SearchActivity extends Activity {
 
@@ -18,7 +17,7 @@ public class SearchActivity extends Activity {
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SearchActivity.this, FavoriteActivity.class);
+                Intent i = new Intent(SearchActivity.this, FavoriteFragment.class);
                 SearchActivity.this.startActivity(i);
             }
         });
