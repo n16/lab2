@@ -1,5 +1,9 @@
 package com.cmpe.ni.mytube;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,13 +12,19 @@ import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.Toast;
+
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteActivity extends AppCompatActivity  {
+public class FavoriteActivity extends AppCompatActivity implements VideoClickListener  {
     VideosAdapter listviewadapter;
+    final private String DEVKEY = "AIzaSyBk1K3GI4ogDKBk5qHL3L5R5ZUCOWbHI4I";
 
     private VideosListView listView;
     List<Video> videosList = new ArrayList<Video>();
@@ -24,7 +34,7 @@ public class FavoriteActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorite_main);
         listView = (VideosListView) findViewById(R.id.videosListView);
-        listviewadapter = new VideosAdapter(this, videosList);
+        listviewadapter = new VideosAdapter(this, videosList, this);
 
         //get the videos
         getUserYouTubeFeed();
@@ -147,7 +157,7 @@ public class FavoriteActivity extends AppCompatActivity  {
         Library lib = (Library) msg.getData().get(GetVideos.LIBRARY);
         // Because we have created a custom ListView we don't have to worry about setting the adapter in the activity
         // we can just call our custom method with the list of items we want to display
-        listView.setVideos(lib.getVideos());
+        listView.setVideos(lib.getVideos(), this);
     }
 
     @Override
@@ -159,4 +169,19 @@ public class FavoriteActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void StartPlayback(Video video) {
+        try {
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent(this, DEVKEY, video.getId());
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast t = Toast.makeText(this,
+                    "Could not start playback of video, please ensure you have the YouTube app installed",
+                    Toast.LENGTH_LONG);
+            t.show();
+        } catch (Exception e) {
+            Toast t = Toast.makeText(this, "Couldn't start video: " + e.getMessage(), Toast.LENGTH_LONG);
+            t.show();
+        }
+    }
 }

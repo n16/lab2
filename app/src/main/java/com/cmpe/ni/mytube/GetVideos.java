@@ -44,15 +44,16 @@ public class GetVideos implements Runnable {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 System.out.println("This Object: "+ jsonObject.toString());
+
                 // The title of the video
                 String title = jsonObject.getJSONObject("snippet").getString("title");
                 System.out.println("This title: "+ title);
-                String url = "";
-                url = "https://www.youtube.com/watch?v="+jsonObject.getJSONObject("snippet").getJSONObject("resourceId").getString("videoId")+"&list="+jsonObject.getJSONObject("snippet").getString("playlistId");
-                //url = "https://www.youtube.com/watch?v=w81g199L8YA&list=PL6VpGVvm-JOj8z-axC-7UESR9X0CRxeG4";
+
+                String id = jsonObject.getJSONObject("snippet").getJSONObject("resourceId").getString("videoId");
+                String playlist = jsonObject.getJSONObject("snippet").getString("playlistId");
 
                 String thumbUrl = jsonObject.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("standard").getString("url");
-                videos.add(new Video(title, url, thumbUrl, 1));
+                videos.add(new Video(title, thumbUrl, 1, id, playlist));
 
             }
             Library lib = new Library(username, videos);
