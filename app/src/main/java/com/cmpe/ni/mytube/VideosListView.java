@@ -1,5 +1,4 @@
 package com.cmpe.ni.mytube;
-import java.util.List;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.List;
 
 public class VideosListView extends ListView {
 

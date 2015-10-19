@@ -1,11 +1,5 @@
 package com.cmpe.ni.mytube;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -16,6 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 public class ViewThumbnail extends LinearLayout {
 
